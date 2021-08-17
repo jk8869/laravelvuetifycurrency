@@ -54,16 +54,14 @@ export default {
         handleSubmit(e) {
             e.preventDefault();
             const data = new FormData();
-            data.append( "email", this.email );
-            data.append( "password", this.password );
-            fetch("api/login", {method: "POST",
-                    body: data
-                })
+            data.append("email", this.email);
+            data.append("password", this.password);
+            fetch("api/login", { method: "POST", body: data })
                 .then(res => res.clone().json())
                 .then(response => {
                     window.Laravel.isLoggedin = true;
                     if (response.user.id) {
-                        this.$router.push({ name: "currency" });
+                        this.$router.push({ name: "volume" });
                     } else {
                         this.error = response.message;
                     }

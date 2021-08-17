@@ -4,6 +4,7 @@ import vuetify from './vuetify';
 import App from './components/App'
 import Login from "./components/Login";
 import Currency from "./components/Currency";
+import Volume from "./components/Volume"
 
 Vue.use(VueRouter)
 window.axios = require('axios');
@@ -13,9 +14,19 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
+            name: 'default',
+            component: Volume
+        },
+        {
+            path: '/volume',
+            name: 'volume',
+            component: Volume
+        },
+        {
+            path: '/currency',
             name: 'currency',
             component: Currency
-        },
+        },  
         {
             path: '/login',
             name: 'login',
@@ -23,14 +34,7 @@ const router = new VueRouter({
         },
     ],
 });
-router.beforeEach((to, from, next) => {
-    if (to.fullPath !== "/login") {
-        if (!window.Laravel.isLoggedin) {
-            router.push({ name: 'login' })
-        }
-    }
-    next();
-})
+
 
 const app = new Vue({
     el: '#app',
